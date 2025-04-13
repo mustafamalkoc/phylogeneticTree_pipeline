@@ -1,0 +1,11 @@
+proteins:
+  - MYPROTEIN1
+  - MYPROTEIN2
+
+# Paths to databases
+blast_database: "/cta/users/mmalkoc/evo_of_RPs/blastDB/eu_blastDB"
+blastdb_fasta: "/cta/users/mmalkoc/evo_of_RPs/initial_data/proteomes/compiled_eukaryote_proteomes.fasta"
+
+# Additional parameters
+given_taxid: "9606"
+paralog_count: "3"
