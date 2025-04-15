@@ -2,12 +2,13 @@
 
 configfile: "config.yaml"
 
-# Include the BLAST rule file (you can include more rule files later)
+# Include rules
 include: "workflows/rules/blast.smk"
+include: "workflows/rules/mafft_fftns.smk"
+include: "workflows/rules/trim_msa.smk"
+include: "workflows/rules/iqtree.smk"
 
 rule all:
     input:
-        # The final BLAST .txt for each protein:
-        expand("results/{protein}/psiblast/{protein}_blastOutput.txt", protein=config["proteins"]),
-        # The parsed FASTA for each protein:
-        expand("results/{protein}/psiblast/{protein}_blasthits.fasta", protein=config["proteins"]),
+        # Final output files
+        expand("results/{protein}/msa/{protein}_trimmed_fftns.fasta", protein=config["proteins"]),
