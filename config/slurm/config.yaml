@@ -1,0 +1,33 @@
+jobs: 100
+
+executor: "cluster-generic"
+cluster-generic-submit-cmd: "sbatch -A {resources.account} -p {resources.partition} -J {rule} --qos={resources.partition} --mem={resources.mem_gb}G --cpus-per-task={resources.cpus} -e logs/cluster/{rule}_%A.err --output=/dev/null"
+software-deployment-method: "conda"
+
+printshellcmds: True
+keep-going:     True
+rerun-incomplete: True
+
+default-resources:
+  account: users
+  partition: short_mdbf
+  cpus: 1
+  mem_gb: 5
+
+set-resources:
+  blast:
+    partition: mid_mdbf
+    cpus: 4
+    mem_gb: 8
+  mafft:
+    partition: long_mdbf
+    cpus: 8
+    mem_gb: 50
+  trim_msa:
+    partition: mid_mdbf
+    cpus: 4
+    mem_gb: 8
+  iqtree:
+    partition: longer_mdbf
+    cpus: 4
+    mem_gb: 8
