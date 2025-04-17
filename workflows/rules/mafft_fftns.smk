@@ -3,7 +3,6 @@ rule mafft_fftns:
         fasta_file = rules.parse_psiblast.output.fasta
     output:
         msa_file = "results/{protein}/msa/{protein}_fftns.fasta"
-    threads: 8
     log:
         "logs/{protein}/msa/{protein}_fftns.log",
     benchmark:
@@ -17,7 +16,7 @@ rule mafft_fftns:
           mafft \
             --retree 2 \
             --maxiterate 1000 \
-            --thread {threads} \
+            --thread {resources.cpus} \
             {input.fasta_file} > {output.msa_file} &&
           echo "`date -R`: mafft_fftns ended successfully!"
         ) || (

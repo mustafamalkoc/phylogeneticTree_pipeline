@@ -1,9 +1,11 @@
 rule iqtree:
     input:
-        trimmedMSA = rules.trim_msa.output.trimmed_msa
+        trimmedMSA = rules.trim_msa.output.trimmed_msa,
     output:
-        tree_dir = "results/{protein}/iqtree/{protein}"
-    threads: 8
+        treeFile = "results/{protein}/iqtree/{protein}.treefile",
+        iqtreeLog = "results/{protein}/iqtree/{protein}.log",
+        modelFile = "results/{protein}/iqtree/{protein}.model.gz",
+
     log:
         "logs/{protein}/iqtree/{protein}_fftns.log",
     benchmark:
@@ -22,7 +24,7 @@ rule iqtree:
             -T AUTO \
             -bb 1000 \
             -alrt 1000 \
-            -pre {output.tree_dir} \
+            -pre "results/{wildcards.protein}/iqtree/{wildcards.protein}" \
             -seed 12345 &&
           echo "`date -R`: iqtree ended successfully!"
         ) || (
