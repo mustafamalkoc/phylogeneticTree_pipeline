@@ -1,5 +1,9 @@
-results/
+results/*
+
 .snakemake
-resources/
+
 logs/
-results/
+
+resources/blastDB
+resources/proteomes
+resources/proteinSeqs
