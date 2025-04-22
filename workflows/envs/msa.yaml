@@ -1,8 +1,5 @@
 name: msa
-channels:
-  - conda-forge
-  - bioconda
-  - defaults
+
 dependencies:
-  - mafft=7.505
-  - clipkit=1.4.1
+  - bioconda::mafft=7.505
+  - bioconda::clipkit=2.4.1
