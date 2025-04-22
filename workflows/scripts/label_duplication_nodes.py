@@ -16,10 +16,10 @@ def label_duplication_nodes(tree_file):
             node1_taxon = set()
             node2_taxon = set()
             for leaf in leaves1:
-                taxid1 = leaf.split("|")[-1]
+                taxid1 = leaf.split("_")[-1]
                 node1_taxon.add(taxid1)
             for leaf2 in leaves2:
-                taxid2 = leaf2.split("|")[-1]
+                taxid2 = leaf2.split("_")[-1]
                 node2_taxon.add(taxid2)
             
             common_taxa = len(set.intersection(node1_taxon, node2_taxon))
@@ -27,7 +27,8 @@ def label_duplication_nodes(tree_file):
             if common_taxa:
                 print(min_clade)
             if common_taxa >= 1 :
-                node.name = "Dup:" +str(common_taxa) + "/" + str(min_clade)
+                old_name = node.name if node.name else "Unnamed"
+                node.name = f"{old_name}|Dup:{common_taxa}/{min_clade}"
      
     new_t = t
     new_t.write(outfile=tree_file.split(".")[0] + "_dup.nwk",format=1)

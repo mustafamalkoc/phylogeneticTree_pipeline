@@ -16,7 +16,7 @@ def get_most_common_specific_tax_rank(tree_file):
 			leaf_names = node.get_leaf_names()
 			leaf_tax = []
 			for leaf in leaf_names:
-				tax_id = int(leaf.strip().split("|")[-1])
+				tax_id = int(leaf.strip().split("_")[-1])
 				lineage = ncbi.get_lineage(tax_id)
 				leaf_tax.append(lineage)
 			common_items = set.intersection(*map(set, leaf_tax))
