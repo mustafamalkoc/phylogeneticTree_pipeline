@@ -15,7 +15,7 @@ rule trim_msa:
             {input.msa_file} \
             -m kpic-smart-gap \
             -o {output.trimmed_msa} &&
-          echo "`date -R`: trimming_fftns ended successfully!" &&
+          echo "`date -R`: trimming_fftns ended successfully!"
           
         ) || (
           echo "`date -R`: trimming_fftns failed..."
