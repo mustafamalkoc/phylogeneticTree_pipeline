@@ -13,6 +13,7 @@ proteins:
 # Paths to databases
 blast_database: "resources/blastDB/eu_blastDB"
 blastdb_fasta: "resources/proteomes/proteomes_subset.fasta"
+pfamDB: "/cta/users/mmalkoc/evo_of_RPs/domain_architecture/Pfam-A.hmm"
 
 # Additional parameters
 given_taxid: "9606"
