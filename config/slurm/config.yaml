@@ -1,46 +1,62 @@
-jobs: 100
+jobs: 999
 
 executor: "cluster-generic"
-cluster-generic-submit-cmd: "sbatch -A {resources.account} -p {resources.partition} -J {rule} --qos={resources.partition} --mem={resources.mem_gb}G --cpus-per-task={resources.cpus} -e logs/cluster/{rule}_%A.err --output=/dev/null"
+cluster-generic-submit-cmd: "bash workflows/scripts/submit_slurm.sh \
+                              {resources.account} \
+                              {rule} \
+                              {wildcards.protein} \
+                              {resources.partition} \
+                              {resources.qos} \
+                              {resources.cpus} \
+                              {resources.mem_gb}"
+                              
+
 software-deployment-method: "conda"
 
 printshellcmds: True
 keep-going:     True
 rerun-incomplete: True
-rerun-triggers: "mtime"
+#rerun-triggers: "mtime"
 
 default-resources:
   account: users
   partition: short_mdbf
+  qos: short_mdbf
   cpus: 1
   mem_gb: 8
 
 set-resources:
   psiblast:
     partition: mid_mdbf
+    qos: mid_mdbf
     cpus: 4
     mem_gb: 8
 
   parse_psiblast:
     partition: mid_mdbf
+    qos: mid_mdbf
     mem_gb: 50
 
   mafft_fftns:
     partition: long_mdbf
+    qos: long_mdbf
     cpus: 8
     mem_gb: 80
 
-  trim_msa:
+  clipkit_fftns:
     partition: mid_mdbf
+    qos: mid_mdbf
     cpus: 4
     mem_gb: 8
 
   iqtree:
     partition: longer_mdbf
+    qos: longer_mdbf
     cpus: 8
     mem_gb: 10
 
   hmmscan:
     partition: mid_mdbf
+    qos: mid_mdbf
     cpus: 10
     mem_gb: 10
