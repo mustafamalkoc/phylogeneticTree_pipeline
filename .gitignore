@@ -7,5 +7,6 @@ logs/
 resources/blastDB
 resources/proteomes
 resources/proteinSeqs
+resources/pfamDB
 
 workflows/scripts/__pycache__
