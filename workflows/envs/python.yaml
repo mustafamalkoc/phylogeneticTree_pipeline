@@ -1,14 +1,10 @@
-name: pyTesterEnv
-channels:
-  - bioconda
-  - defaults
+name: python
+
 dependencies:
-  - python=3.10
-  - pip
-  - pip:
-      - biopython
-      - pandas==1.5.3
-      - numpy==1.23.5
-      - matplotlib==3.6.2
-      - seaborn==0.12.2
-      - ete3==3.1.2
+  - conda-forge::python=3.10
+  - conda-forge::biopython
+  - conda-forge::pandas==1.5.3
+  - conda-forge::numpy==1.23.5
+  - conda-forge::matplotlib==3.6.2
+  - conda-forge::seaborn==0.12.2
+  - conda-forge::ete3==3.1.2
