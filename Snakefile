@@ -3,12 +3,13 @@
 configfile: "config/config.yaml"
 
 # Include rules
-include: "workflows/rules/blast.smk"
+include: "workflows/rules/psiblast.smk"
+include: "workflows/rules/hmmscan.smk"
 include: "workflows/rules/mafft_fftns.smk"
 include: "workflows/rules/trim_msa.smk"
 include: "workflows/rules/iqtree.smk"
 include: "workflows/rules/tree_processing.smk"
-include: "workflows/rules/hmmscan.smk"
+include: "workflows/rules/generate_CSVs.smk"
 include: "workflows/rules/visualize.smk"
 
 rule all:
