@@ -4,7 +4,7 @@ rule psiblast:
     output:
         txt = "results/{protein}/psiblast/{protein}_blastOutput.txt"
     log:
-        "logs/{protein}/psiblast/{protein}_psiblast.log"
+        "logs/{protein}/psiblast/psiblast.log"
     conda:
         "../envs/blast.yaml"
     shell:
@@ -19,7 +19,7 @@ rule psiblast:
             -num_threads {resources.cpus} \
             -outfmt 7 &&
           echo "`date -R`: {rule} ended successfully!" ||
-          {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  > {log} 2>&1 
+          {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1 
         """
 
 rule parse_psiblast:
@@ -30,7 +30,7 @@ rule parse_psiblast:
     output:
         fasta = "results/{protein}/psiblast/{protein}_blasthits.fasta"
     log:
-        "logs/{protein}/psiblast/{protein}_parse_psiblast.log"
+        "logs/{protein}/psiblast/parse_psiblast.log"
     conda:
         "../envs/python.yaml"
     shell:
@@ -43,5 +43,5 @@ rule parse_psiblast:
             {output.fasta} \
             {config[subject_taxid]} &&
           echo "`date -R`: {rule} ended successfully!" ||
-        {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  > {log} 2>&1
+        {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1
         """

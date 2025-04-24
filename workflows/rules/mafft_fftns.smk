@@ -4,23 +4,19 @@ rule mafft_fftns:
     output:
         msa_file = "results/{protein}/msa/{protein}_fftns.fasta"
     log:
-        "logs/{protein}/msa/{protein}_fftns.log",
+        "logs/{protein}/msa/msa_fftns.log",
     benchmark:
-        "logs/{protein}/msa/{protein}_fftns.benchmark",
+        "logs/{protein}/msa/msa_fftns.benchmark",
     conda:
         "../envs/msa.yaml"
     shell:
         """
-        (
-          echo "`date -R`: mafft_fftns started..." &&
+        (echo "`date -R`: {rule} started..." &&
           mafft \
             --retree 2 \
             --maxiterate 1000 \
             --thread {resources.cpus} \
             {input.fasta_file} > {output.msa_file} &&
-          echo "`date -R`: mafft_fftns ended successfully!"
-        ) || (
-          echo "`date -R`: mafft_fftns failed..."
-          exit 1
-        ) > {log} 2>&1
+          echo "`date -R`: {rule} ended successfully!" ||
+          {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1
         """

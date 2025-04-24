@@ -2,15 +2,14 @@ rule hmmscan:
     input:
         fasta_file = rules.parse_psiblast.output.fasta,
     output:
-        domtblout = "results/{protein}/hmmscan/{protein}_hmmscan_domtblout.txt",
+        domtblout = "results/{protein}/hmmscan/{protein}_domtblout.txt",
     log:
-        "logs/cluster/{protein}/hmmscan/{protein}_hmmscan.log"
+        "logs/{protein}/hmmscan/hmmscan.log"
     conda:
         "../envs/hmmer.yaml"
     shell:
         """
-        (
-          echo "`date -R`: hmmscan started..." &&
+        (echo "`date -R`: {rule} started..." &&
           hmmscan \
             --cpu {resources.cpus} \
             --noali \
@@ -18,55 +17,24 @@ rule hmmscan:
             --domtblout {output.domtblout} \
             {config[pfamDB]}\
             {input.fasta_file} && 
-          echo "`date -R`: hmmscan ended successfully!"
-        ) || (
-          echo "`date -R`: hmmscan failed..."
-          exit 1
-        ) > {log} 2>&1
+          echo "`date -R`: {rule} ended successfully!" ||
+          {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1
         """
 rule parse_hmmscan:
     input:
         domtblout = rules.hmmscan.output.domtblout,        
     output:
-        parsed_hmmscan = "results/{protein}/hmmscan/{protein}_hmmscan_parsed.json",
+        parsed_hmmscan = "results/{protein}/hmmscan/{protein}_parsed_domtbl.json",
     log:
-        "logs/cluster/{protein}/hmmscan/{protein}_parse_hmmscan.log"
+        "logs/{protein}/hmmscan/parse_hmmscan.log"
     conda:
         "../envs/python.yaml"
     shell:
         """
-        (
-          echo "`date -R`: parse_hmmscan started..." &&
+        (echo "`date -R`: {rule} started..." &&
           python workflows/scripts/parse_hmmscan_domtblout.py \
             {input.domtblout} \
             {output.parsed_hmmscan} && 
-          echo "`date -R`: parse_hmmscan ended successfully!"
-        ) || (
-          echo "`date -R`: parse_hmmscan failed..."
-          exit 1
-        ) > {log} 2>&1
-        """
-rule make_domain_csv:
-    input:
-        treeFile = rules.midpoint_rooting.output.rootedTree,
-        hmmscan = rules.parse_hmmscan.output.parsed_hmmscan,
-    output:
-        domain_csv = "results/{protein}/hmmscan/{protein}_domains.csv",
-    log:
-        "logs/cluster/{protein}/hmmscan/{protein}_make_domain_csv.log"
-    conda:
-        "../envs/python.yaml"
-    shell:
-        """
-        (
-          echo "`date -R`: make_domain_csv started..." &&
-          python workflows/scripts/make_domain_csv.py \
-            {input.treeFile} \
-            {input.hmmscan} \
-            {output.domain_csv} && 
-          echo "`date -R`: make_domain_csv ended successfully!"
-        ) || (
-          echo "`date -R`: make_domain_csv failed..."
-          exit 1
-        ) > {log} 2>&1
+          echo "`date -R`: {rule} ended successfully!" ||
+          {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1
         """
