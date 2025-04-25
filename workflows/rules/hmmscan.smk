@@ -1,8 +1,8 @@
 rule hmmscan:
     input:
-        fasta_file = rules.parse_psiblast.output.fasta,
+        fasta_file = rules.parse_psiblast.output.fasta
     output:
-        domtblout = "results/{protein}/hmmscan/{protein}_domtblout.txt",
+        domtblout = "results/{protein}/hmmscan/{protein}_domtblout.txt"
     log:
         "logs/{protein}/hmmscan/hmmscan.log"
     conda:
@@ -15,16 +15,16 @@ rule hmmscan:
             --noali \
             --cut_ga \
             --domtblout {output.domtblout} \
-            {config[pfamDB]}\
+            {config[pfamDB]} \
             {input.fasta_file} && 
           echo "`date -R`: {rule} ended successfully!" ||
           {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1
         """
 rule parse_hmmscan:
     input:
-        domtblout = rules.hmmscan.output.domtblout,        
+        domtblout = rules.hmmscan.output.domtblout        
     output:
-        parsed_hmmscan = "results/{protein}/hmmscan/{protein}_parsed_domtbl.json",
+        parsed_hmmscan = "results/{protein}/hmmscan/{protein}_parsed_domtbl.json"
     log:
         "logs/{protein}/hmmscan/parse_hmmscan.log"
     conda:
@@ -34,7 +34,7 @@ rule parse_hmmscan:
         (echo "`date -R`: {rule} started..." &&
           python workflows/scripts/parse_hmmscan_domtblout.py \
             {input.domtblout} \
-            {output.parsed_hmmscan} && 
+            {output.parsed_hmmscan} &&
           echo "`date -R`: {rule} ended successfully!" ||
           {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1
         """

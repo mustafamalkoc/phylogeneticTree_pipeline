@@ -4,9 +4,9 @@ rule mafft_fftns:
     output:
         msa_file = "results/{protein}/msa/{protein}_fftns.fasta"
     log:
-        "logs/{protein}/msa/msa_fftns.log",
+        "logs/{protein}/msa/msa_fftns.log"
     benchmark:
-        "logs/{protein}/msa/msa_fftns.benchmark",
+        "logs/{protein}/msa/msa_fftns.benchmark"
     conda:
         "../envs/msa.yaml"
     shell:

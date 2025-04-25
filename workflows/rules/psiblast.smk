@@ -37,7 +37,7 @@ rule parse_psiblast:
         """
         (
         echo "`date -R`: {rule} started..." &&
-          python workflows/scripts/parse_psiblast.py\
+          python workflows/scripts/parse_psiblast.py \
             {input.blastOutput} \
             {input.blastdb} \
             {output.fasta} \

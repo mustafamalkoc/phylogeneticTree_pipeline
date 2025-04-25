@@ -4,7 +4,7 @@ rule iqtree:
     output:
         treeFile = "results/{protein}/iqtree/{protein}_fftns.treefile",
         iqtreeLog = "results/{protein}/iqtree/{protein}_fftns.log",
-        modelFile = "results/{protein}/iqtree/{protein}_fftns.model.gz",
+        modelFile = "results/{protein}/iqtree/{protein}_fftns.model.gz"
 
     log:
         "logs/{protein}/iqtree/iqtree_fftns.log",
