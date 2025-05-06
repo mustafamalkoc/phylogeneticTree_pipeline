@@ -1,8 +1,10 @@
 rule psiblast:
     input:
-        query_protein = "resources/proteinSeqs/{protein}.fasta"
+        query_protein = "resources/proteinSeqs/{protein}_newHeader.fasta"
     output:
-        txt = "results/{protein}/psiblast/{protein}_blastOutput.txt"
+        txt=report("results/{protein}/psiblast/{protein}_blastOutput.txt", category="{protein}", subcategory="PSI-BLAST Hits"),
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/psiblast/psiblast.log"
     conda:
@@ -12,7 +14,7 @@ rule psiblast:
         (echo "`date -R`: {rule} started..." &&
           psiblast \
             -query {input.query_protein} \
-            -db {config[blast_database]} \
+            -db resources/blastDB/blastDB \
             -out {output.txt} \
             -num_iterations 3 \
             -max_target_seqs 6000 \
@@ -25,10 +27,13 @@ rule psiblast:
 rule parse_psiblast:
     input:
         blastOutput = rules.psiblast.output.txt,
-        blastdb = lambda wildcards: config["allProteomesFasta"],
+        compiled_proteomes = lambda wildcards: config["allProteomesFasta"],
         query_fasta = rules.psiblast.input.query_protein
     output:
-        fasta = "results/{protein}/psiblast/{protein}_blasthits.fasta"
+        fasta=report("results/{protein}/psiblast/{protein}_blasthits.fasta", category="{protein}", subcategory="PSI-BLAST Hits"),
+        targetSpecies_prot_list=report("results/{protein}/psiblast/{protein}_targetSpecies_prot_list.txt", category="{protein}", subcategory="PSI-BLAST Hits"),
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/psiblast/parse_psiblast.log"
     conda:
@@ -39,7 +44,7 @@ rule parse_psiblast:
         echo "`date -R`: {rule} started..." &&
           python workflows/scripts/parse_psiblast.py \
             {input.blastOutput} \
-            {input.blastdb} \
+            {input.compiled_proteomes} \
             {output.fasta} \
             {config[subject_taxid]} &&
           echo "`date -R`: {rule} ended successfully!" ||

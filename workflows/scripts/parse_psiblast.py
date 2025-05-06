@@ -24,12 +24,10 @@ def parse_blastp_out(psiblast_out_file, given_taxid):
     """Parses a BLASTP output file (outfmt 7) to extract the hits."""
     blast_dict = defaultdict(list)
     query_protein_accession = ""
-    human_protein_list = []
+    targetSpecies_prot_list = []
     try:
         with open(psiblast_out_file, 'r') as filein_:
             for line in filein_:
-                if line.startswith("#Iteration:") and len(human_protein_list)<3:
-                    human_protein_list = []
                 if line.startswith("# Query: "):
                     query_info = line.split("Query:")[1].strip()
                     query_protein_accession = query_info.split("_")[1]
@@ -51,13 +49,18 @@ def parse_blastp_out(psiblast_out_file, given_taxid):
                     bit_score = fields[11]
                     
                     protein_accession, protein_name, tax_id = subject_acc_ver.split("_")[1],subject_acc_ver.split("_")[2],subject_acc_ver.split("_")[-1]
-                    if tax_id == given_taxid:
-                        human_protein_list.append(subject_acc_ver)
+                    if tax_id == given_taxid and subject_acc_ver not in targetSpecies_prot_list:
+                        targetSpecies_prot_list.append(subject_acc_ver)
 
                     if protein_accession not in blast_dict:
                         blast_dict[subject_acc_ver].append((protein_accession, protein_name, tax_id, identity, alignment_length, mismatches, gap_opens, q_start, q_end, s_start, s_end, evalue, bit_score))
                     else:
                         continue
+            if targetSpecies_prot_list:
+                with open(psiblast_out_file.replace("_blastOutput.txt", "_targetSpecies_prot_list.txt"), 'w') as f:
+                    for item in targetSpecies_prot_list:
+                        f.write(f"{item}\n")
+
     except IOError:
         print(f"Error: Could not read file {psiblast_out_file}")
         sys.exit(1)
