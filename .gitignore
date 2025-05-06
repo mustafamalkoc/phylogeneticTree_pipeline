@@ -1,14 +1,21 @@
 results/*
+!results/README.md
 
 .snakemake
 
 logs/*
+!logs/README.md
 
 resources/blastDB/*
+!resources/blastDB/README.md
 resources/proteomes/*
+!resources/proteomes/README.md
 resources/proteinSeqs/*
+!resources/proteinSeqs/README.md
 resources/pfamDB/*
+!resources/pfamDB/README.md
 
 workflows/scripts/__pycache__
 
-report/final_report.zip
+report/*
+!report/README.md
