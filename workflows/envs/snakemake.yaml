@@ -1,0 +1,5 @@
+name: snakemake
+
+dependencies:
+  - conda-forge::mamba=2.1.0
+  - bioconda::snakemake=9.3.0

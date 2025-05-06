@@ -4,7 +4,7 @@ executor: "cluster-generic"
 cluster-generic-submit-cmd: "bash workflows/scripts/submit_slurm.sh \
                               {resources.account} \
                               {rule} \
-                              {wildcards.protein} \
+                              {resources.protein_name} \
                               {resources.partition} \
                               {resources.qos} \
                               {resources.cpus} \
@@ -24,8 +24,21 @@ default-resources:
   qos: short_mdbf
   cpus: 1
   mem_gb: 8
+  protein_name: 'NA'
 
 set-resources:
+  hmmpress:
+    partition: mid_mdbf
+    qos: mid_mdbf
+    cpus: 4
+    mem_gb: 40
+
+  make_blasDB:
+    partition: mid_mdbf
+    qos: mid_mdbf
+    cpus: 4
+    mem_gb: 50
+
   psiblast:
     partition: mid_mdbf
     qos: mid_mdbf
@@ -60,3 +73,12 @@ set-resources:
     qos: mid_mdbf
     cpus: 10
     mem_gb: 10
+
+  download_pfamDB:
+    partition: mid_mdbf
+    qos: mid_mdbf
+    cpus: 4
+    mem_gb: 20
+
+  combine_figures:
+    mem_gb: 15

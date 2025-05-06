@@ -1,19 +1,21 @@
 proteins:
   #- ERCC2_P18074
-  #- XPF_Q92889
+  #- Q92889
   #- XPC_Q01831
   #- ERCC3_P19447
   #- ERCC6_Q03468
   #- ERCC8_Q13216
   #- DDB2_Q92466
-  #- STK19_P49842
+  - P49842
   #- UVSSA_Q2YD98
-  - XPA_P23025
+  - P23025
   
-# Paths to databases
-blast_database: "resources/blastDB/eu_blastDB"
+# Paths to databases and files
 allProteomesFasta: "resources/proteomes/proteomes_subset.fasta"
-pfamDB: "resources/pfamDB/Pfam-A.hmm"
+
+# URLs
+pfamDB_URL: "https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz"
+md5_URL: "https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/md5_checksums"
 
 # Taxonomy ID of the target species/organism
 subject_taxid: "9606"  # Homo sapiens
