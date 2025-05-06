@@ -2,12 +2,14 @@
 library(ggtree)
 library(tidyverse)
 library(RColorBrewer)
+library(ape)
 
 # Get command-line arguments
 args <- commandArgs(trailingOnly = TRUE)
 csv_path <- args[1]
 tree_path <- args[2]
 output_path <- args[3]
+fasta_path <- args[4]
 
 # Read the tree data
 tree <- read.tree(tree_path)
@@ -19,6 +21,16 @@ domains <- read.table(csv_path, sep=",", header = TRUE, stringsAsFactors = FALSE
 rownames(domains) <- domains$leaf_name
 domains$leaf_name <- NULL
 colnames(domains) <- sub("\\.$", "", colnames(domains))
+
+# Read the FASTA file
+fasta_lines <- readLines(fasta_path)
+fasta_header <- fasta_lines[1]  # Get the first line (header)
+
+# Extract protein name and accession number from the header
+# Header format: >sp_uniprotID_proteinName_speciesName_speciesID
+header_parts <- strsplit(sub("^>", "", fasta_header), "_")[[1]]
+accession_number <- header_parts[2]  # Extract uniprotID
+protein_name <- header_parts[3]      # Extract proteinName
 
 # Check the number of columns in domains
 if (ncol(domains) > 1) {
@@ -44,14 +56,6 @@ rotate_all <- function(tree) {
 }
 rotated_tree <- rotate_all(tree)
 
-# # Debugging: Print the number of leaves and the number of rows in domains
-# cat("Number of leaves in tree:", length(rotated_tree$tip.label), "\n")
-# cat("Number of rows in domains:", nrow(domains), "\n")
-# 
-# # Debugging: Print the first few tip labels and row names to check alignment
-# cat("First few tip labels in tree:", head(rotated_tree$tip.label), "\n")
-# cat("First few row names in domains:", head(rownames(domains)), "\n")
-
 # Ensure the row names of domains match the tip labels of the tree
 if (!all(rotated_tree$tip.label %in% rownames(domains))) {
   stop("Mismatch between tree tip labels and domain row names.")
@@ -64,8 +68,11 @@ p <- ggtree(rotated_tree, ladderize = FALSE, layout = "rectangular")
 heatmap <- gheatmap(p, domains, width = 0.4, offset = 0.01, color = NULL,
                     colnames_angle = 90, colnames = FALSE, colnames_offset_y = 0.25, hjust = 0, font.size = 2) +
   scale_fill_manual(values = color_mapping, limits = colnames(domains), na.value = "white") +
-  theme(legend.position = "right", legend.title = element_text(size = 20), legend.text = element_text(size = 18), legend.key.size = unit(12, 'mm'))+
-  labs(fill = "Domain")
+  theme(legend.position = "right", legend.title = element_text(size = 20), 
+        legend.text = element_text(size = 18), legend.key.size = unit(12, 'mm'),
+        plot.title = element_text(hjust = 0.5, size = 24, face = "bold")) +
+  labs(fill = "Domains") +
+  ggtitle(paste("Domain Tree of ", protein_name, "_", accession_number, sep = "")) 
 
 # Save the plot
-ggsave(output_path, width = 20, height = 30)
+ggsave(output_path, plot = heatmap, width = 20, height = 30, dpi = 600)

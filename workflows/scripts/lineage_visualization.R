@@ -2,12 +2,14 @@
 library(ggtree)
 library(tidyverse)
 library(RColorBrewer)
+library(ape)
 
 # Get command-line arguments
 args <- commandArgs(trailingOnly = TRUE)
 lineage_csv_path <- args[1]
 tree_path <- args[2]
 output_path <- args[3]
+fasta_path <- args[4]
 
 # Read the tree data
 tree <- read.tree(tree_path)
@@ -18,6 +20,16 @@ lineage <- read.table(lineage_csv_path, sep=",", header = TRUE, stringsAsFactors
 # Convert leaf_name to rownames
 rownames(lineage) <- lineage$Leaf
 lineage$Leaf <- NULL
+
+# Read the FASTA file
+fasta_lines <- readLines(fasta_path)
+fasta_header <- fasta_lines[1]  # Get the first line (header)
+
+# Extract protein name and accession number from the header
+# Header format: >sp_uniprotID_proteinName_speciesName_speciesID
+header_parts <- strsplit(sub("^>", "", fasta_header), "_")[[1]]
+accession_number <- header_parts[2]  # Extract uniprotID
+protein_name <- header_parts[3]      # Extract proteinName
 
 # Define a dictionary for color-rank matches
 color_dict <- c(
@@ -33,7 +45,6 @@ color_dict <- c(
   "Fungi" = "#F2E3B3",  # Light pastel yellow
   "Others" = "#9AB8C8"   # Soft light blue
 )
-
 
 # Filter out columns with all NA values
 lineage <- lineage[, colSums(is.na(lineage)) < nrow(lineage)]
@@ -67,11 +78,6 @@ present_ranks <- unique(unlist(combined_lineage))
 present_ranks <- present_ranks[!is.na(present_ranks)]
 color_mapping <- color_dict[present_ranks]
 
-#combined_lineage$Group1 <- factor(combined_lineage$Group1, levels = c("Metazoa", "Viridiplantae", "Fungi", "Others"))
-#combined_lineage$Group2 <- factor(combined_lineage$Group2, levels = c("Vertebrata", "Arthropoda", "Chlorophyta", "Embryophyta"))
-#combined_lineage$Group3 <- factor(combined_lineage$Group3, levels = c("Mammalia", "Sauria", "Actinopterygii"))
-
-
 # Rotate the tree
 rotate_all <- function(tree) {
   for (idx in seq(tree$Nnode + 2, nrow(tree$edge) + 1)) {
@@ -85,7 +91,7 @@ rotated_tree <- rotate_all(tree)
 p <- ggtree(rotated_tree, ladderize = FALSE, layout = "rectangular")
 
 # Create the heatmap
-heatmap <- gheatmap(p, combined_lineage, width = 0.2,  # Adjusted width for wider columns
+heatmap <- gheatmap(p, combined_lineage, width = 0.2,
                     offset = 0.01, color = NULL, 
                     colnames_angle = 90, colnames = FALSE, 
                     colnames_offset_y = 0.25, hjust = 0, font.size = 2) +
@@ -93,7 +99,10 @@ heatmap <- gheatmap(p, combined_lineage, width = 0.2,  # Adjusted width for wide
                     breaks = c("Metazoa", "Vertebrata", "Mammalia", "Sauria", "Actinopterygii", 
                                "Arthropoda", "Viridiplantae", "Embryophyta","Chlorophyta", "Fungi", "Others")) +
   theme(legend.position = "right", legend.title = element_text(size = 20), 
-        legend.text = element_text(size = 14), legend.key.size = unit(16, 'mm')) +
-  labs(fill = "Taxonomic Rank")
+        legend.text = element_text(size = 14), legend.key.size = unit(16, 'mm'),
+        plot.title = element_text(hjust = 0.5, size = 24, face = "bold")) +
+  labs(fill = "Taxonomic Ranks") +
+  ggtitle(paste("Lineage Tree of ", protein_name, "_", accession_number, sep = "")) 
+
 # Save the plot
-ggsave(output_path, width = 20, height = 30)
+ggsave(output_path, plot = heatmap, width = 20, height = 30, dpi = 600)
