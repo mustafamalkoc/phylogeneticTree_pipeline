@@ -1,0 +1,1 @@
+- PFAM database will be dowloaded to and indexed in this directory

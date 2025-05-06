@@ -1,0 +1,1 @@
+- The FASTA file to create BLAST database should be provided in this directory.

@@ -1,0 +1,1 @@
+- Query protein sequences will be stored in this directory

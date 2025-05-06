@@ -1,0 +1,1 @@
+- BLAST databese will be stored in this directory.
