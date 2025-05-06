@@ -10,3 +10,5 @@ resources/proteinSeqs
 resources/pfamDB
 
 workflows/scripts/__pycache__
+
+report/final_report.zip
