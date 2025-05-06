@@ -3,6 +3,8 @@ rule mafft_fftns:
         fasta_file = rules.parse_psiblast.output.fasta
     output:
         msa_file = "results/{protein}/msa/{protein}_fftns.fasta"
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/msa/msa_fftns.log"
     benchmark:

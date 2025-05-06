@@ -3,6 +3,8 @@ rule make_lineage_csv:
         treeFile = rules.midpoint_rooting.output.rootedTree
     output:
         lineage_csv = "results/{protein}/lineage/{protein}_lineage.csv"
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/lineage/make_lineage_csv.log"
     conda:
@@ -22,6 +24,8 @@ rule make_domain_csv:
         hmmscan = rules.parse_hmmscan.output.parsed_hmmscan
     output:
         domain_csv = "results/{protein}/hmmscan/{protein}_domains.csv"
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/hmmscan/make_domain_csv.log"
     conda:

@@ -5,7 +5,8 @@ rule iqtree:
         treeFile = "results/{protein}/iqtree/{protein}_fftns.treefile",
         iqtreeLog = "results/{protein}/iqtree/{protein}_fftns.log",
         modelFile = "results/{protein}/iqtree/{protein}_fftns.model.gz"
-
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/iqtree/iqtree_fftns.log",
     benchmark:

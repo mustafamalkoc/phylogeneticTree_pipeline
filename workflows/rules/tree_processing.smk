@@ -2,7 +2,9 @@ rule midpoint_rooting:
     input:
         treeFile = rules.iqtree.output.treeFile
     output:
-        rootedTree = "results/{protein}/iqtree/{protein}_fftns_mid.nwk"
+        rootedTree=report("results/{protein}/iqtree/{protein}_fftns_mid.nwk", category="{protein}", subcategory="Tree Files"),
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/tree_processing/midpoint_rooting.log"
     conda:
@@ -19,7 +21,9 @@ rule add_lineage:
     input:
         treeFile = rules.midpoint_rooting.output.rootedTree
     output:
-        lineageAddedTree = "results/{protein}/iqtree/{protein}_fftns_mid_lineage.nwk"
+        lineageAddedTree = "results/{protein}/iqtree/{protein}_fftns_mid_lineage.nwk",
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/tree_processing/add_lineage.log"
     conda:
@@ -36,7 +40,9 @@ rule label_dup_nodes:
     input:
         treeFile = rules.add_lineage.output.lineageAddedTree
     output:
-        tree_midLineageDup = "results/{protein}/iqtree/{protein}_fftns_mid_lineage_dup.nwk"
+        tree_midLineageDup=report("results/{protein}/iqtree/{protein}_fftns_mid_lineage_dup.nwk", category="{protein}", subcategory="Tree Files"),
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/tree_processing/label_dup_nodes.log"
     conda:

@@ -3,6 +3,8 @@ rule clipkit_fftns:
         msa_file = rules.mafft_fftns.output.msa_file
     output:
         trimmed_msa = "results/{protein}/msa/{protein}_trimmed_fftns.fasta"
+    resources:
+        protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/msa/clipkit_fftns.log"
     conda:
