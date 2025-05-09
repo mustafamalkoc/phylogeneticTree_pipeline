@@ -38,7 +38,7 @@ rule make_blastDB:
     input: 
         allProteomesFasta = config["allProteomesFasta"]
     output:
-        db_pin = "resources/blastDB/blastDB.pin",
+        blastdb_pdb = "resources/blastDB/blastDB.pdb",
     log:
         "logs/data_preparation/make_blastDB.log"
     conda:

@@ -43,7 +43,7 @@ mkdir -p "$LOG_DIR"
 sbatch \
   -A $ACCOUNT \
   -p $PARTITION \
-  -J ${PROTEIN}_${RULE_NAME} \
+  -J ${RULE_NAME}_${PROTEIN} \
   --qos=$QOS \
   --mem=${MEM_GB}G \
   --cpus-per-task=$CPUS \

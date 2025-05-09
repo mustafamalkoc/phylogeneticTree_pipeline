@@ -1,4 +1,4 @@
-jobs: 999
+jobs: 100
 
 executor: "cluster-generic"
 cluster-generic-submit-cmd: "bash workflows/scripts/submit_slurm.sh \
@@ -19,66 +19,65 @@ rerun-incomplete: True
 #rerun-triggers: "mtime"
 
 default-resources:
-  account: users
-  partition: short_mdbf
-  qos: short_mdbf
+  account: investor
+  partition: short_investor
+  qos: short_investor
   cpus: 1
   mem_gb: 8
   protein_name: 'NA'
 
 set-resources:
   hmmpress:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: mid_investor
+    qos: mid_investor
     cpus: 4
     mem_gb: 40
 
   make_blasDB:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: mid_investor
+    qos: mid_investor
     cpus: 4
     mem_gb: 50
 
   psiblast:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: mid_investor
+    qos: mid_investor
     cpus: 4
     mem_gb: 8
 
   parse_psiblast:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: mid_investor
+    qos: mid_investor
     mem_gb: 50
 
   mafft_fftns:
-    partition: long_mdbf
-    qos: long_mdbf
-    cpus: 8
-    mem_gb: 80
+    partition: long_investor
+    qos: long_investor
+    cpus: 10
+    mem_gb: 100
 
   clipkit_fftns:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: mid_investor
+    qos: mid_investor
     cpus: 4
-    mem_gb: 8
+    mem_gb: 16
 
   iqtree:
-    partition: longer_mdbf
-    qos: longer_mdbf
-    cpus: 8
-    mem_gb: 10
+    partition: longer_investor
+    qos: longer_investor
+    cpus: 10
+    mem_gb: 20
 
   hmmscan:
-    partition: mid_mdbf
-    qos: mid_mdbf
-    cpus: 10
+    partition: mid_investor
+    qos: mid_investor
+    cpus: 8
     mem_gb: 10
 
   download_pfamDB:
-    partition: mid_mdbf
-    qos: mid_mdbf
-    cpus: 4
+    partition: mid_investor
+    qos: mid_investor
     mem_gb: 20
 
   combine_figures:
-    mem_gb: 15
+    mem_gb: 40

@@ -7,6 +7,8 @@ rule hmmscan:
         protein_name = lambda wildcards: wildcards.protein
     log:
         "logs/{protein}/hmmscan/hmmscan.log"
+    benchmark:
+        "logs/{protein}/iqtree/iqtree_fftns.benchmark",
     conda:
         "../envs/hmmer.yaml"
     shell:

@@ -1,17 +1,98 @@
 proteins:
-  #- ERCC2_P18074
-  #- Q92889
-  #- XPC_Q01831
-  #- ERCC3_P19447
-  #- ERCC6_Q03468
-  #- ERCC8_Q13216
-  #- DDB2_Q92466
-  - P49842
-  #- UVSSA_Q2YD98
+  # - Q8TAQ2
+  # - Q9UGP5
+  # - P49916
+  # - Q8WUZ0
+  # - P60709
+  # - Q8NHY5
+  # - Q92784
+  # - Q9Y2M0
+  # - Q93009
+  # - Q6PML9
+  # - Q13889
+  # - Q92993
+  # - Q01831
+  # - Q13216
+  # - Q8NFD5
+  # - P12004
+  # - P51948
+  # - Q16531
+  # - Q03468
+  # - Q9H0E7
+  # - Q9BQE9
+  # - P54727
+  # - P04637
+  # - O15527
+  # - Q969G3
+  # - P35244
+  # - P27694
+  # - Q92925
+  # - Q15054
+  # - P07992
+  # - Q9BX63
+  # - Q92782
+  # - Q96GM5
+  # - Q8N668
+  # - P41208
+  # - Q9NPI1
+  # - P51587
+  # - O60921
+  # - O96019
+  # - P05114
+  # - Q2YD98
+  # - Q6ZNA4
+  # - Q6STE5
+  # - P19447
+  # - Q6ZYL4
+  # - O94805
+  # - P54252
+  # - Q07864
+  # - Q9HCS7
+  # - P43351
+  # - Q12798
+  # - P28340
+  # - Q13619
+  # - P51531
+  # - Q6P1K8
+  # - Q13888
+  # - P18074
+  # - Q92759
+  # - P15927
+  # - Q68CP9
+  # - Q70EL2
+  # - Q96EB6
+  # - Q96T76
+  # - Q8WUB8
+  # - P18858
+  # - Q9UBT6
+  # - Q8IY92
+  # - Q4VC05
+  # - Q96T60
+  # - Q86U86
+  # - Q13156
+  # - P23025
+  # - P54725
+  # - O14497
+  # - Q92889
+  # - Q00597
+  # - P36954
+  # - Q92466
+  # - P28715
+  # - P78549
+  # - Q92922
+  # - Q92785
+  # - P32780
+  # - O95251
+  # - Q12824
+  # - P51532
+  # - P49842
   - P23025
-  
+  - Q2YD98
+  - Q03468
+  - Q01831
+
 # Paths to databases and files
-allProteomesFasta: "resources/proteomes/proteomes_subset.fasta"
+allProteomesFasta: "resources/proteomes/compiled_proteomes.fasta"
 
 # URLs
 pfamDB_URL: "https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz"
@@ -19,4 +100,3 @@ md5_URL: "https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/md5_checksums
 
 # Taxonomy ID of the target species/organism
 subject_taxid: "9606"  # Homo sapiens
-
