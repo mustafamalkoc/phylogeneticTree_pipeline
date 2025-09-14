@@ -14,69 +14,84 @@ cluster-generic-submit-cmd: "bash workflows/scripts/submit_slurm.sh \
 software-deployment-method: "conda"
 
 printshellcmds: True
-keep-going:     True
+keep-going: True
 rerun-incomplete: True
-#rerun-triggers: "mtime"
+max-jobs-per-second: 2
+max-status-checks-per-second: 2
+latency-wait: 60
+rerun-triggers: "mtime"
 
 default-resources:
-  account: investor
-  partition: short_investor
-  qos: short_investor
+  account: users
+  partition: short_mdbf
+  qos: short_mdbf
   cpus: 1
   mem_gb: 8
   protein_name: 'NA'
 
 set-resources:
   hmmpress:
-    partition: mid_investor
-    qos: mid_investor
+    partition: mid_mdbf
+    qos: mid_mdbf
     cpus: 4
     mem_gb: 40
 
   make_blasDB:
-    partition: mid_investor
-    qos: mid_investor
+    partition: mid_mdbf
+    qos: mid_mdbf
     cpus: 4
     mem_gb: 50
 
   psiblast:
-    partition: mid_investor
-    qos: mid_investor
+    partition: mid_mdbf
+    qos: mid_mdbf
     cpus: 4
     mem_gb: 8
 
   parse_psiblast:
-    partition: mid_investor
-    qos: mid_investor
+    partition: mid_mdbf
+    qos: mid_mdbf
     mem_gb: 50
 
-  mafft_fftns:
-    partition: long_investor
-    qos: long_investor
-    cpus: 10
-    mem_gb: 100
+  mafft_linsi:
+    partition: long_mdbf
+    qos: long_mdbf
+    cpus: 8
+    mem_gb: 160
 
-  clipkit_fftns:
-    partition: mid_investor
-    qos: mid_investor
+  clipkit:
+    partition: mid_mdbf
+    qos: mid_mdbf
     cpus: 4
     mem_gb: 16
 
-  iqtree:
-    partition: longer_investor
-    qos: longer_investor
+  modelfinder:
+    partition: long_mdbf
+    qos: long_mdbf
     cpus: 10
     mem_gb: 20
 
+  parse_modelfinder_output:
+    partition: short_mdbf
+    qos: short_mdbf
+    cpus: 1
+    mem_gb: 4
+
+  iqtree:
+    partition: longer_mdbf
+    qos: longer_mdbf
+    cpus: 6
+    mem_gb: 20
+
   hmmscan:
-    partition: mid_investor
-    qos: mid_investor
-    cpus: 8
+    partition: mid_mdbf
+    qos: mid_mdbf
+    cpus: 4
     mem_gb: 10
 
   download_pfamDB:
-    partition: mid_investor
-    qos: mid_investor
+    partition: mid_mdbf
+    qos: mid_mdbf
     mem_gb: 20
 
   combine_figures:
