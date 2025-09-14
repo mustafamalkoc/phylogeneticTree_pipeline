@@ -8,4 +8,5 @@ dependencies:
   - conda-forge::r-ape=5.8
   - conda-forge::r-cowplot=1.1.1
   - conda-forge::r-magick=2.7.4
+  - conda-forge::r-scales=1.4.0
   - bioconda::bioconductor-ggtree=3.10.0

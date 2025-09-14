@@ -1,5 +1,6 @@
 name: msa
 
 dependencies:
-  - bioconda::mafft=7.505
+  - conda-forge::perl=5.32.1
+  - conda-forge::mafft=7.526
   - bioconda::clipkit=2.4.1
