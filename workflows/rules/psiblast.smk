@@ -3,7 +3,7 @@ rule psiblast:
         query_protein = "resources/proteinSeqs/{protein}_newHeader.fasta",
         blastdb = rules.make_blastDB.output.blastdb_pdb,
     output:
-        txt=report("results/{protein}/psiblast/{protein}_blastOutput_4k.txt", category="{protein}", subcategory="PSI-BLAST Hits"),
+        txt=report("results/{protein}/psiblast/{protein}_blastOutput.txt", category="{protein}", subcategory="PSI-BLAST Hits"),
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
@@ -18,7 +18,7 @@ rule psiblast:
             -db resources/blastDB/blastDB \
             -out {output.txt} \
             -num_iterations 3 \
-            -max_target_seqs 5000 \
+            -max_target_seqs 500 \
             -num_threads {resources.cpus} \
             -evalue 1e-6 \
             -outfmt 7 &&
@@ -32,8 +32,8 @@ rule parse_psiblast:
         compiled_proteomes = lambda wildcards: config["allProteomesFasta"],
         query_fasta = rules.psiblast.input.query_protein
     output:
-        fasta=report("results/{protein}/psiblast/{protein}_blasthits_4k.fasta", category="{protein}", subcategory="PSI-BLAST Hits"),
-        targetSpecies_prot_list=report("results/{protein}/psiblast/{protein}_targetSpecies_prot_list_4k.txt", category="{protein}", subcategory="PSI-BLAST Hits"),
+        fasta=report("results/{protein}/psiblast/{protein}_blasthits.fasta", category="{protein}", subcategory="PSI-BLAST Hits"),
+        targetSpecies_prot_list=report("results/{protein}/psiblast/{protein}_targetSpecies_prot_list.txt", category="{protein}", subcategory="PSI-BLAST Hits"),
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
