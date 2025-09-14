@@ -1,18 +1,18 @@
-rule clipkit_fftns:
+rule clipkit:
     input:
-        msa_file = rules.mafft_fftns.output.msa_file
+        msa_file = "results/{protein}/msa/{protein}_mafft_linsi.fasta"
     output:
-        trimmed_msa = "results/{protein}/msa/{protein}_trimmed_fftns.fasta"
+        trimmed_msa = "results/{protein}/msa/{protein}_trimmed_clipkit_linsi.fasta"
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
-        "logs/{protein}/msa/clipkit_fftns.log"
+        "logs/{protein}/msa/clipkit_mafft_linsi.log"
     conda:
         "../envs/msa.yaml"
     shell:
         """
         (echo "`date -R`: {rule} started..." &&
-          clipkit \
+           clipkit \
             {input.msa_file} \
             -m kpic-smart-gap \
             -o {output.trimmed_msa} &&
