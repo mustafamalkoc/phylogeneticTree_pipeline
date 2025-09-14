@@ -32,7 +32,7 @@ rule make_domain_csv:
         "../envs/python.yaml"
     shell:
         """
-        (echo "`date -R`: {rule} started..." &&
+        (echo "`date -R`: {rule} started... " &&
           python workflows/scripts/make_domain_csv.py \
             {input.treeFile} \
             {input.hmmscan} \

@@ -18,9 +18,11 @@ elif [ "$RULE_NAME" = "download_query_protein" ] || [ "$RULE_NAME" = "change_pro
   LOG_DIR="logs/${PROTEIN}/proteinData"
 elif [ "$RULE_NAME" = "psiblast" ] || [ "$RULE_NAME" = "parse_psiblast" ]; then
   LOG_DIR="logs/${PROTEIN}/psiblast"
-elif [ "$RULE_NAME" = "mafft_fftns" ] || [ "$RULE_NAME" = "clipkit_fftns" ]; then
+elif [ "$RULE_NAME" = "mafft_linsi" ] || [ "$RULE_NAME" = "clipkit" ]; then
   LOG_DIR="logs/${PROTEIN}/msa"
-elif [ "$RULE_NAME" = "iqtree" ]; then
+elif [ "$RULE_NAME" = "modelfinder" ] || [ "$RULE_NAME" = "parse_modelfinder_output" ]; then
+  LOG_DIR="logs/${PROTEIN}/modelfinder"
+elif [ "$RULE_NAME" = "iqtree" ] || [ "$RULE_NAME" = "modelfinder" ] || [ "$RULE_NAME" = "parse_modelfinder_output" ]; then
   LOG_DIR="logs/${PROTEIN}/iqtree"
 elif [ "$RULE_NAME" = "midpoint_rooting" ] || [ "$RULE_NAME" = "add_lineage" ] || [ "$RULE_NAME" = "label_dup_nodes" ]; then
   LOG_DIR="logs/${PROTEIN}/tree_processing"
