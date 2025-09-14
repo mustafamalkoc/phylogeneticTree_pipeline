@@ -1,6 +1,6 @@
 rule domain_visualization:
     input:
-        treeFile = rules.midpoint_rooting.output.rootedTree,
+        treeFile = rules.label_dup_nodes.output.tree_midLineageDup,
         domain_csv = rules.make_domain_csv.output.domain_csv,
         fastaFile = "resources/proteinSeqs/{protein}_newHeader.fasta",
     output:
@@ -13,7 +13,7 @@ rule domain_visualization:
         "../envs/visualize.yaml"
     shell:
         """
-        (echo "`date -R`: domain visualization started..." &&
+        (echo "`date -R`: domain visualization started... " &&
           Rscript workflows/scripts/domain_visualization.R \
             {input.domain_csv} \
             {input.treeFile} \
@@ -25,7 +25,7 @@ rule domain_visualization:
    
 rule lineage_visualization:
     input:
-        treeFile = rules.midpoint_rooting.output.rootedTree,
+        treeFile = rules.label_dup_nodes.output.tree_midLineageDup,
         lineage_csv = rules.make_lineage_csv.output.lineage_csv,
         fastaFile = "resources/proteinSeqs/{protein}_newHeader.fasta",
     output:
@@ -53,7 +53,7 @@ rule combine_figures:
         lineageFigure = rules.lineage_visualization.output.lineage_figure,
         domainFigure = rules.domain_visualization.output.domain_figure,
     output:
-        combinedFigure = report("results/{protein}/figures/{protein}_Combined_Tree_Figure.png", category="{protein}", subcategory="Figures"),
+        combinedFigure = report("results/{protein}/figures/{protein}_combinedTreeFigure.png", category="{protein}", subcategory="Figures"),
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
