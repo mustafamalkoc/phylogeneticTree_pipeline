@@ -9,7 +9,7 @@ rule download_query_protein:
         """
         (echo "`date -R`: {rule} started..." &&
           mkdir -p resources/proteinSeqs &&
-          wget "https://www.uniprot.org/uniprotkb/{wildcards.protein}.fasta" -O {output} &&
+          wget "https://www.uniprot.org/uniprotkb/{resources.protein_name}.fasta" -O {output} &&
           echo "`date -R`: {rule} ended successfully!" || 
           {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1
         """
