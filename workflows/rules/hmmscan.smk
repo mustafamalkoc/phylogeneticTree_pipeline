@@ -8,7 +8,7 @@ rule hmmscan:
     log:
         "logs/{protein}/hmmscan/hmmscan.log"
     benchmark:
-        "logs/{protein}/iqtree/iqtree_fftns.benchmark",
+        "logs/{protein}/hmmscan/hmmscan.benchmark",
     conda:
         "../envs/hmmer.yaml"
     shell:
@@ -26,7 +26,7 @@ rule hmmscan:
         """
 rule parse_hmmscan:
     input:
-        domtblout = rules.hmmscan.output.domtblout        
+        domtblout = "results/{protein}/hmmscan/{protein}_domtblout.txt"       
     output:
         parsed_hmmscan = "results/{protein}/hmmscan/{protein}_parsed_domtbl.json"
     resources:

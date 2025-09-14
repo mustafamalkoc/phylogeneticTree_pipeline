@@ -25,11 +25,11 @@ def parse_hmmscan_file(hmmscan_against_profiles_files_path):
             e_value = float(words[6])
             align_length = align_stop - align_start
             domain = words[0]
-            if e_value < 0.01:
-                if acc_no not in acc_no_to_result_dict:
-                    acc_no_to_result_dict[acc_no] = {domain: {'e_value': e_value, 'score': score, 'align_length': align_length, 'align_start': align_start, 'align_stop': align_stop}}
-                else:
-                    acc_no_to_result_dict[acc_no].update({domain: {'e_value': e_value, 'score': score, 'align_length': align_length, 'align_start': align_start, 'align_stop': align_stop}})
+            
+            if acc_no not in acc_no_to_result_dict:
+                acc_no_to_result_dict[acc_no] = {domain: {'e_value': e_value, 'score': score, 'align_length': align_length, 'align_start': align_start, 'align_stop': align_stop}}
+            else:
+                acc_no_to_result_dict[acc_no].update({domain: {'e_value': e_value, 'score': score, 'align_length': align_length, 'align_start': align_start, 'align_stop': align_stop}})
 
     return acc_no_to_result_dict
 
