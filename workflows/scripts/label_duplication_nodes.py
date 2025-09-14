@@ -28,7 +28,7 @@ def label_duplication_nodes(tree_file):
                 print(min_clade)
             if common_taxa >= 1 :
                 old_name = node.name if node.name else "Unnamed"
-                node.name = f"{old_name}|Dup:{common_taxa}/{min_clade}"
+                node.name = f"Dup_{common_taxa}/{min_clade}|{old_name}"
      
     new_t = t
     new_t.write(outfile=tree_file.split(".")[0] + "_dup.nwk",format=1)
