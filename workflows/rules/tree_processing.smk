@@ -2,7 +2,7 @@ rule midpoint_rooting:
     input:
         treeFile = rules.iqtree.output.treeFile
     output:
-        rootedTree=report("results/{protein}/iqtree/{protein}_fftns_mid.nwk", category="{protein}", subcategory="Tree Files"),
+        rootedTree=report("results/{protein}/iqtree/{protein}_mafft_linsi_mid.nwk", category="{protein}", subcategory="Tree Files"),
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
@@ -21,7 +21,7 @@ rule add_lineage:
     input:
         treeFile = rules.midpoint_rooting.output.rootedTree
     output:
-        lineageAddedTree = "results/{protein}/iqtree/{protein}_fftns_mid_lineage.nwk",
+        lineageAddedTree = "results/{protein}/iqtree/{protein}_mafft_linsi_mid_lineage.nwk",
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
@@ -40,7 +40,7 @@ rule label_dup_nodes:
     input:
         treeFile = rules.add_lineage.output.lineageAddedTree
     output:
-        tree_midLineageDup=report("results/{protein}/iqtree/{protein}_fftns_mid_lineage_dup.nwk", category="{protein}", subcategory="Tree Files"),
+        tree_midLineageDup=report("results/{protein}/iqtree/{protein}_mafft_linsi_mid_lineage_dup.nwk", category="{protein}", subcategory="Tree Files"),
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
