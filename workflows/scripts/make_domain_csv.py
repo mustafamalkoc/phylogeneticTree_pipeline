@@ -27,7 +27,7 @@ def make_domain_file(tree_path, domtbl_path, output_path):
     #print(domain_count)
     for seq in domain_dict.keys():
         for domain in domain_dict[seq].keys():
-            if 10 <= domain_count.get(domain, 0):
+            if domain_count.get(domain, 0) > 2:
                 if not domain in all_domains:
                     all_domains.append(domain)
 
