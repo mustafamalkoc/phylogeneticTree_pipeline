@@ -1,6 +1,6 @@
 # Phylogenetic Tree Pipeline
 
-A Snakemake workflow for protein homolog discovery, Pfam domain annotation, multiple sequence alignment, maximum-likelihood phylogenetic inference, and integrated tree visualization — starting from one or more UniProt accessions.
+A Snakemake workflow for protein ortholog discovery, Pfam domain annotation, multiple sequence alignment, maximum-likelihood phylogenetic inference, and integrated tree visualization — starting from one or more UniProt accessions.
 
 ![Example combined phylogenetic tree and domain visualization](example_combined_tree_figure.png)
 
@@ -23,7 +23,7 @@ A Snakemake workflow for protein homolog discovery, Pfam domain annotation, mult
 
 ## Overview
 
-This pipeline automates the construction and visualization of protein family phylogenies. Given a set of UniProt accessions, the workflow retrieves the query sequences, identifies homologs by iterative PSI-BLAST against a user-supplied proteome database, annotates Pfam domains via HMMER, builds a curated multiple sequence alignment with MAFFT E-INS-i, trims it with ClipKIT, selects a substitution model with ModelFinder, and infers a maximum-likelihood tree with IQ-TREE. Post-inference, trees are midpoint-rooted, annotated with NCBI lineage labels, and duplication nodes are flagged. Final outputs are publication-ready figures that overlay lineage and domain architecture onto the phylogeny.
+This pipeline automates the construction and visualization of protein family phylogenies. Given a set of UniProt accessions, the workflow retrieves the query sequences, collocts homologs by iterative PSI-BLAST against a user-supplied proteome database, annotates Pfam domains via HMMER, builds a curated multiple sequence alignment with MAFFT E-INS-i, trims it with ClipKIT, selects a substitution model with ModelFinder, and infers a maximum-likelihood tree with IQ-TREE. Post-inference, trees are midpoint-rooted, annotated with NCBI lineage labels, and duplication nodes are flagged. Final outputs are figures that overlay lineage and domain architecture onto the phylogeny.
 
 The workflow is parallelized across proteins and scales to HPC environments via a SLURM submission profile. Resource requirements for IQ-TREE (threads and memory) are estimated dynamically from the ModelFinder run, avoiding over- or under-allocation on the cluster.
 
