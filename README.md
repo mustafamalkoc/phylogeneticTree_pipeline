@@ -16,7 +16,6 @@ A Snakemake workflow for protein ortholog discovery, Pfam domain annotation, mul
 - [Usage](#usage)
 - [Output Structure](#output-structure)
 - [Resource Management](#resource-management)
-- [Tool Versions and Citations](#tool-versions-and-citations)
 - [Troubleshooting](#troubleshooting)
 
 ---
