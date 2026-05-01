@@ -1,6 +1,7 @@
 rule hmmscan:
     input:
         fasta_file = rules.parse_psiblast.output.fasta,
+        pfam_indices = rules.hmmpress.output
     output:
         domtblout = "results/{protein}/hmmscan/{protein}_domtblout.txt"
     resources:

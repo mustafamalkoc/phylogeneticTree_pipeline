@@ -29,7 +29,7 @@ rule psiblast:
 rule parse_psiblast:
     input:
         blastOutput = rules.psiblast.output.txt,
-        compiled_proteomes = lambda wildcards: config["allProteomesFasta"],
+        compiled_proteomes = lambda wildcards: config["compiledProteomesFasta"],
         query_fasta = rules.psiblast.input.query_protein
     output:
         fasta=report("results/{protein}/psiblast/{protein}_blasthits.fasta", category="{protein}", subcategory="PSI-BLAST Hits"),

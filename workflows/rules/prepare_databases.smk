@@ -36,7 +36,7 @@ rule change_protein_header:
 
 rule make_blastDB:
     input: 
-        allProteomesFasta = config["allProteomesFasta"]
+        compiledProteomesFasta = config["compiledProteomesFasta"]
     output:
         blastdb_pdb = "resources/blastDB/blastDB.pdb",
     log:
@@ -48,7 +48,7 @@ rule make_blastDB:
         (echo "`date -R`: {rule} started..." &&
           mkdir -p resources/blastDB &&
           makeblastdb \
-            -in {input.allProteomesFasta} \
+            -in {input.compiledProteomesFasta} \
             -out resources/blastDB/blastDB \
             -dbtype prot \
             -parse_seqids &&
