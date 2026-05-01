@@ -1,12 +1,12 @@
 rule clipkit:
     input:
-        msa_file = "results/{protein}/msa/{protein}_mafft_linsi.fasta"
+        msa_file = "results/{protein}/msa/{protein}_mafft_einsi.fasta"
     output:
-        trimmed_msa = "results/{protein}/msa/{protein}_trimmed_clipkit_linsi.fasta"
+        trimmed_msa = "results/{protein}/msa/{protein}_trimmed_clipkit_einsi.fasta"
     resources:
         protein_name = lambda wildcards: wildcards.protein
     log:
-        "logs/{protein}/msa/clipkit_mafft_linsi.log"
+        "logs/{protein}/msa/clipkit_mafft_einsi.log"
     conda:
         "../envs/msa.yaml"
     shell:

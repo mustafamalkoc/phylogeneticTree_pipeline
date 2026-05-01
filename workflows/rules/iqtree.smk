@@ -74,16 +74,16 @@ rule iqtree:
         trimmedMSA = rules.clipkit.output.trimmed_msa,
         resource_file = rules.parse_modelfinder_output.output.resource_file
     output:
-        treeFile = "results/{protein}/iqtree/{protein}_mafft_linsi.treefile",
-        iqtreeLog = "results/{protein}/iqtree/{protein}_mafft_linsi.log",
+        treeFile = "results/{protein}/iqtree/{protein}_mafft_einsi.treefile",
+        iqtreeLog = "results/{protein}/iqtree/{protein}_mafft_einsi.log",
     resources:
         protein_name = lambda wildcards: wildcards.protein,
         cpus = lambda wildcards, input: get_dynamic_cpus(input.resource_file),
         mem_gb = lambda wildcards, input: get_dynamic_memory(input.resource_file)
     log:
-        "logs/{protein}/iqtree/iqtree_mafft_linsi.log",
+        "logs/{protein}/iqtree/iqtree_mafft_einsi.log",
     benchmark:
-        "logs/{protein}/iqtree/iqtree_mafft_linsi.benchmark",
+        "logs/{protein}/iqtree/iqtree_mafft_einsi.benchmark",
     conda:
         "../envs/iqtree.yaml"
     shell:
@@ -99,7 +99,7 @@ rule iqtree:
             -T {resources.cpus} \
             -bb 1000 \
             -alrt 1000 \
-            -pre "results/{wildcards.protein}/iqtree/{wildcards.protein}_mafft_linsi" \
+            -pre "results/{wildcards.protein}/iqtree/{wildcards.protein}_mafft_einsi" \
             -seed 12345 &&
           echo "`date -R`: {rule} ended successfully!" ||
           {{ echo "`date -R`: {rule} failed..."; exit 1; }}  )  >> {log} 2>&1

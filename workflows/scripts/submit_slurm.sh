@@ -18,7 +18,7 @@ elif [ "$RULE_NAME" = "download_query_protein" ] || [ "$RULE_NAME" = "change_pro
   LOG_DIR="logs/${PROTEIN}/proteinData"
 elif [ "$RULE_NAME" = "psiblast" ] || [ "$RULE_NAME" = "parse_psiblast" ]; then
   LOG_DIR="logs/${PROTEIN}/psiblast"
-elif [ "$RULE_NAME" = "mafft_linsi" ] || [ "$RULE_NAME" = "clipkit" ]; then
+elif [ "$RULE_NAME" = "mafft_einsi" ] || [ "$RULE_NAME" = "clipkit" ]; then
   LOG_DIR="logs/${PROTEIN}/msa"
 elif [ "$RULE_NAME" = "modelfinder" ] || [ "$RULE_NAME" = "parse_modelfinder_output" ]; then
   LOG_DIR="logs/${PROTEIN}/modelfinder"
