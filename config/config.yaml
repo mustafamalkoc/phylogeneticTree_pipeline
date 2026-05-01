@@ -6,15 +6,13 @@ proteins:
   - Q8WUZ0
   - P60709
   - Q8NHY5
-
-
   
 # Paths to databases and files
-allProteomesFasta: "resources/proteomes/compiled_subset.faa"
+compiledProteomesFasta: "resources/proteomes/compiled_subset.updated.faa"
 
 # URLs
-pfamDB_URL: "http://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz"
-md5_URL: "http://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/md5_checksums"
+pfamDB_URL: "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam38.0/Pfam-A.hmm.gz"
+md5_URL: "http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam38.0/md5_checksums"
 
 # Taxonomy ID of the target species/organism
 subject_taxid: "9606"  # Homo sapiens

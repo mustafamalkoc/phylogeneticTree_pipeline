@@ -22,76 +22,76 @@ latency-wait: 60
 rerun-triggers: "mtime"
 
 default-resources:
-  account: users
-  partition: short_mdbf
-  qos: short_mdbf
+  account: adelab
+  partition: genomics
+  qos: adelab
   cpus: 1
   mem_gb: 8
   protein_name: 'NA'
 
 set-resources:
   hmmpress:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: genomics
+    qos: adelab
     cpus: 4
     mem_gb: 40
 
   make_blasDB:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: genomics
+    qos: adelab
     cpus: 4
     mem_gb: 50
 
   psiblast:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: genomics
+    qos: adelab
     cpus: 4
     mem_gb: 8
 
   parse_psiblast:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: genomics
+    qos: adelab
     mem_gb: 50
 
-  mafft_linsi:
-    partition: long_mdbf
-    qos: long_mdbf
-    cpus: 8
-    mem_gb: 160
+  mafft_einsi:
+    partition: genomics
+    qos: adelab
+    cpus: 24
+    mem_gb: 300
 
   clipkit:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: genomics
+    qos: adelab
     cpus: 4
-    mem_gb: 16
+    mem_gb: 40
 
   modelfinder:
-    partition: long_mdbf
-    qos: long_mdbf
-    cpus: 10
-    mem_gb: 20
+    partition: genomics
+    qos: adelab
+    cpus: 20
+    mem_gb: 80
 
   parse_modelfinder_output:
-    partition: short_mdbf
-    qos: short_mdbf
+    partition: genomics
+    qos: adelab
     cpus: 1
     mem_gb: 4
 
   iqtree:
-    partition: longer_mdbf
-    qos: longer_mdbf
-    cpus: 6
-    mem_gb: 20
+    partition: genomics
+    qos: adelab
+    #cpus: 16  #<-- Commented out to allow dynamic assignment from iqtree.smk
+    mem_gb: 60 #<-- Commented out to allow dynamic assignment from iqtree.smk
 
   hmmscan:
-    partition: mid_mdbf
-    qos: mid_mdbf
-    cpus: 4
-    mem_gb: 10
+    partition: genomics
+    qos: adelab
+    cpus: 8
+    mem_gb: 20
 
   download_pfamDB:
-    partition: mid_mdbf
-    qos: mid_mdbf
+    partition: genomics
+    qos: adelab
     mem_gb: 20
 
   combine_figures:
