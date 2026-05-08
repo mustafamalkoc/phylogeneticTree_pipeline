@@ -2,7 +2,7 @@
 
 A Snakemake workflow for protein ortholog discovery, Pfam domain annotation, multiple sequence alignment, maximum-likelihood phylogenetic inference, and integrated tree visualization — starting from one or more UniProt accessions.
 
-![Example combined phylogenetic tree and domain visualization](example_combined_tree_figure.png)
+![Pipeline Figure](pipeline_figure.png)
 
 ---
 
@@ -272,6 +272,8 @@ results/{protein}/
 ```
 
 The combined figure (`{protein}_combinedTreeFigure.png`) is the primary output for biological interpretation. It places lineage context and inferred domain architecture side-by-side on the same tree topology.
+
+![Example combined phylogenetic tree and domain visualization](example_combined_tree_figure.png)
 
 ---
 
