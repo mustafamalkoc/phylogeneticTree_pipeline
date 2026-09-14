@@ -1,6 +1,6 @@
 # Phylogenetic Tree Pipeline
 
-A Snakemake workflow for protein ortholog discovery, Pfam domain annotation, multiple sequence alignment, maximum-likelihood phylogenetic inference, and integrated tree visualization — starting from one or more UniProt accessions.
+A Snakemake workflow for protein ortholog discovery using Pfam domain annotation, multiple sequence alignment, maximum-likelihood phylogenetic inference, and integrated tree visualization — starting from one or more UniProt accessions.
 
 ![Pipeline Figure](pipeline_figure.png)
 
